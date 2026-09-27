@@ -4,6 +4,11 @@
 int player_score = 0;
 int cpu_score = 0;
 
+Color Green = Color{38, 185, 154, 255};
+Color Dark_Green = Color{20, 160, 133, 255};
+Color Light_Green = Color{129, 204, 184, 255};
+Color Yellow = Color{243, 213, 91, 255};
+
 class Ball
 {
 public:
@@ -13,7 +18,7 @@ public:
 
     void Draw()
     {
-        DrawCircle(x, y, radius, WHITE);
+        DrawCircle(x, y, radius, Yellow);
     }
 
     void Update()
@@ -30,7 +35,7 @@ public:
         {
             cpu_score++;
             ResetBall();
-        } 
+        }
 
         if (x - radius <= 0)
         {
@@ -48,8 +53,6 @@ public:
         speed_x *= speed_choices[GetRandomValue(0, 1)];
         speed_y *= speed_choices[GetRandomValue(0, 1)];
     }
-
-     
 };
 
 class Paddle
@@ -75,7 +78,7 @@ public:
 
     void Draw()
     {
-        DrawRectangle(x, y, width, height, WHITE);
+        DrawRectangleRounded(Rectangle{x, y, width, height}, 0.8, 0, WHITE);
     }
 
     void Update()
@@ -176,7 +179,13 @@ int main()
         }
 
         // Drawing
-        ClearBackground(BLACK);
+        ClearBackground(Dark_Green);
+
+        // Play area for player
+        DrawRectangle(screen_width / 2, 0, screen_width / 2, screen_height, Green);
+        
+        // Circle in the mid
+        DrawCircle(screen_width / 2, screen_height / 2, 150, Light_Green);
 
         // Drawing the mid line
         DrawLine(screen_width / 2, 0, screen_width / 2, screen_height, WHITE);
